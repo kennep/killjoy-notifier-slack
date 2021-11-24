@@ -13,7 +13,7 @@ use xdg::BaseDirectories;
 
 use serde::{Serialize, Deserialize};
 
-use log::{debug, error, info, Level};
+use log::{debug, info};
 use env_logger::Env;
 
 const KILLJOY_BUS_NAME: &str = "com.wangpedersen.KilljoyNotifierSlack1";
@@ -122,7 +122,7 @@ fn post_slack_webhook(config: &Config, _timestamp: u64, unit_name: &str, active_
             text: format!("*{}* has transitioned to state: *{}*", unit_name, active_states.first().unwrap()).to_string(),
             mrkdwn_in: vec!["text".to_string()]
         }],
-        channel: None,
+        channel: config.channel.clone(),
         username: config.username.clone(),
         icon_emoji: config.icon_emoji.clone().unwrap_or(":robot_face:".to_string())        
     };
