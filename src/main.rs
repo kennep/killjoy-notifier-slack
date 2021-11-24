@@ -102,7 +102,7 @@ fn main() -> Result<()> {
         (_, false, _) => Connection::new_session().map_err(Error::new),
     }?;
 
-    let cr = register_object_path(config.clone())?;
+    let cr = register_object_path(config)?;
     register_bus_name(&connection)?;
     cr.serve(&connection)?;
 
@@ -143,11 +143,11 @@ fn post_slack_webhook(
     config: &Config,
     _timestamp: u64,
     unit_name: &str,
-    active_states: &Vec<String>,
+    active_states: &[String],
 ) -> Result<()> {
     let client = reqwest::Client::new();
 
-    let active_states_string = format_active_states(&active_states)?;
+    let active_states_string = format_active_states(active_states)?;
     let payload = SlackPayload {
         attachments: vec![SlackAttachment {
             title: Some(format!("{}: {}", unit_name, active_states_string)),
@@ -155,8 +155,7 @@ fn post_slack_webhook(
                 "*{}* has transitioned to state: *{}*",
                 unit_name,
                 active_states.first().unwrap()
-            )
-            .to_string(),
+            ),
             mrkdwn_in: vec!["text".to_string()],
         }],
         channel: config.channel.clone(),
@@ -164,7 +163,7 @@ fn post_slack_webhook(
         icon_emoji: config
             .icon_emoji
             .clone()
-            .unwrap_or(":robot_face:".to_string()),
+            .unwrap_or_else(|| ":robot_face:".to_string()),
     };
     client
         .post(&config.webhook_url)
@@ -189,11 +188,11 @@ fn get_load_path() -> Result<PathBuf> {
         .with_context(|| format!("Configuration file not found: {}/{}", prefix, suffix))
 }
 
-fn format_active_states(active_states: &Vec<String>) -> Result<String> {
+fn format_active_states(active_states: &[String]) -> Result<String> {
     let formatted: String = active_states
         .chunks(2)
         .next()
-        .ok_or(anyhow!("No active states given!"))?
+        .ok_or_else(|| anyhow!("No active states given!"))?
         .iter()
         .rev()
         .map(|active_state: &String| -> &str { &**active_state })
