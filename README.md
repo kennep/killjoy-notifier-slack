@@ -1,7 +1,7 @@
 killjoy Notifier: Slack
 ==============================
 
-Generate desktop notifications on behalf of
+Generate slack notifications on behalf of
 [killjoy](https://github.com/Ichimonji10/killjoy).
 
 killjoy is a systemd unit monitoring application. It discovers systemd units and

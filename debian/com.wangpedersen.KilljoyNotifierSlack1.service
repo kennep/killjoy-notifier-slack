@@ -1,0 +1,6 @@
+[D-BUS Service]
+Name=com.wangpedersen.KilljoyNotifierSlack1
+SystemdService=killjoy-notifier-slack.service
+Exec=/usr/bin/true
+
+

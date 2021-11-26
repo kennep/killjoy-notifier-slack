@@ -1,0 +1,24 @@
+# The lack of an [Install] section is intentional. This service should *not* be
+# enable-able, and should instead be started on demand. Also:
+#
+#   For bus-activatable services, do not include a "[Install]" section in the
+#   systemd service file, but use the SystemdService= option in the
+#   corresponding DBus service file
+#
+#   -- systemd.service(5)
+
+[Unit]
+Description=Generate slack notifications on behalf of killjoy
+
+[Service]
+Type=dbus
+BusName=com.wangpedersen.KilljoyNotifierSlack1
+ExecStart=/usr/bin/killjoy-notifier-slack
+
+# hardening
+LockPersonality=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+SystemCallArchitectures=native

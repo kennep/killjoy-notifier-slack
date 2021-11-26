@@ -8,12 +8,9 @@ license = "GPL-3.0-or-later"
 name = "killjoy-notifier-slack"
 readme = "README.md"
 repository = "https://github.com/kennep/killjoy-notifier-slack"
-version = "0.1.0"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+version = "0.2.0"
 
 [dependencies]
-chrono = "^0.4.7"
 dbus = "^0.9.5"
 dbus-crossroads = "^0.5.0"
 xdg = "^2.4.0"
@@ -25,4 +22,24 @@ reqwest = "^0.9.18"
 log = "^0.4.14"
 env_logger = "^0.9.0"
 
+[package.metadata.deb]
+extended-description = """
+Generate slack notifications on behalf of killjoy.
 
+killjoy is a systemd unit monitoring application. It discovers systemd units and
+tracks their states. When a unit changes to a state of interest, killjoy
+contacts notifiers. This application is a notifier which, upon being contacted
+by killjoy, will post a Slack message using a webhook.
+"""
+maintainer-scripts = "debian/"
+assets = [
+    ["target/release/killjoy-notifier-slack", "usr/bin/", "755"],
+    ["README.md", "usr/share/doc/killjoy-notifier-slack/", "644"],
+    ["debian/slack-notifier.json", "/etc/xdg/killjoy/", "644"],
+    ["debian/com.wangpedersen.KilljoyNotifierSlack1.conf", "usr/share/dbus-1/system.d/", "644"],
+    ["debian/com.wangpedersen.KilljoyNotifierSlack1.service", "usr/share/dbus-1/system-services/", "644"],
+]
+
+[package.metadata.deb.systemd-units]
+start = false
+enable = false
