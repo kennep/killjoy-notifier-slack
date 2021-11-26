@@ -74,7 +74,8 @@ jobs:
             args: "cargo-deb"
 
         - name: Build debian package
-          run: cargo deb --variant ${OS_NAME}-${OS_REL}
+          # Parse Cargo.toml with grep and cut :-(
+          run: cargo deb --deb-version `cat Cargo.toml | grep '^version'|cut '-d"' -f2`-${OS_REL}1
 
         - name: Release
           uses: softprops/action-gh-release@b21b43df682dab285bf5146c1955e7f3560805f8
