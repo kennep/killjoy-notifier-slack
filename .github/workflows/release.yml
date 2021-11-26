@@ -74,10 +74,7 @@ jobs:
             args: "cargo-deb"
 
         - name: Build debian package
-          uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
-          with:
-            command: deb
-            args: "--variant ${OS_NAME}-${OS_REL}"          
+          run: cargo deb --variant ${OS_NAME}-${OS_REL}
 
         - name: Release
           uses: softprops/action-gh-release@b21b43df682dab285bf5146c1955e7f3560805f8
