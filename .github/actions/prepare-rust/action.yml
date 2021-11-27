@@ -15,7 +15,7 @@ runs:
       - name: Install required packages
         run: |
           set -e
-          SUDO=`which sudo 2>/dev/null`
+          SUDO=`which sudo 2>/dev/null` || true
           $SUDO apt-get update
           $SUDO apt-get install -y ${{ inputs.system_packages }}
         shell: bash
