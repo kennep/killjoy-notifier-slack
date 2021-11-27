@@ -14,7 +14,8 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v2
 
-      - uses: ./.github/actions/prepare-rust
+      - name: Set up Rust environment
+        uses: ./.github/actions/prepare-rust
 
       - name: Run cargo login
         uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
@@ -22,10 +23,10 @@ jobs:
           command: login
           args: "${{secrets.CARGO_TOKEN}}"
  
-      #- name: Run cargo publish
-      #  uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
-      #  with:
-      #    command: publish
+      - name: Run cargo publish
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
+        with:
+          command: publish
 
   package:
       strategy:
@@ -54,7 +55,8 @@ jobs:
         - name: Checkout sources
           uses: actions/checkout@v2
 
-        - uses: ./.github/actions/prepare-rust
+        - name: Set up Rust environment
+          uses: ./.github/actions/prepare-rust
 
         - name: Install cargo-deb
           uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
