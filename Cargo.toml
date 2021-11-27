@@ -8,7 +8,7 @@ license = "GPL-3.0-or-later"
 name = "killjoy-notifier-slack"
 readme = "README.md"
 repository = "https://github.com/kennep/killjoy-notifier-slack"
-version = "0.2.0"
+version = "0.2.1"
 
 [dependencies]
 dbus = "^0.9.5"

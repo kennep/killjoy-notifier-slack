@@ -34,7 +34,7 @@ jobs:
           image:
             - 'debian:buster'   # debian/10
             - 'debian:bullseye' # debian/11
-      name: Build Debian images
+      name: Build Debian packages
       runs-on: ubuntu-latest
       container: ${{ matrix.image }}
 
