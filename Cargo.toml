@@ -8,7 +8,7 @@ license = "GPL-3.0-or-later"
 name = "killjoy-notifier-slack"
 readme = "README.md"
 repository = "https://github.com/kennep/killjoy-notifier-slack"
-version = "0.2.1"
+version = "0.2.2"
 
 [dependencies]
 dbus = "^0.9.5"
@@ -38,6 +38,9 @@ assets = [
     ["debian/slack-notifier.json", "/etc/xdg/killjoy/", "644"],
     ["debian/com.wangpedersen.KilljoyNotifierSlack1.conf", "usr/share/dbus-1/system.d/", "644"],
     ["debian/com.wangpedersen.KilljoyNotifierSlack1.service", "usr/share/dbus-1/system-services/", "644"],
+]
+conf-files = [
+    "/etc/xdg/killjoy/slack-notifier.json"
 ]
 
 [package.metadata.deb.systemd-units]

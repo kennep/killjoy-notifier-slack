@@ -627,7 +627,7 @@ dependencies = [
 
 [[package]]
 name = "killjoy-notifier-slack"
-version = "0.1.0"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "dbus",
