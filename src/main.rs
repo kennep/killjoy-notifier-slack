@@ -195,7 +195,7 @@ fn format_active_states(active_states: &[String]) -> Result<String> {
         .ok_or_else(|| anyhow!("No active states given!"))?
         .iter()
         .rev()
-        .map(|active_state: &String| -> &str { &**active_state })
+        .map(|active_state: &String| -> &str { active_state })
         .collect::<Vec<&str>>()
         .join(" → ");
     Ok(formatted)
