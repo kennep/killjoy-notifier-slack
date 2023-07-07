@@ -4,7 +4,7 @@ use std::os::unix::process;
 use std::path::PathBuf;
 
 use anyhow::{anyhow, Context as AnyhowContext, Error, Result};
-use structopt::StructOpt;
+use clap::Parser;
 
 use dbus::blocking::Connection;
 use dbus_crossroads::{Crossroads, MethodErr};
@@ -22,15 +22,15 @@ const KILLJOY_OBJECT_PATH: &str = "/com/wangpedersen/KilljoyNotifierSlack1";
 const KILLJOY_INTERFACE: &str = "name.jerebear.KilljoyNotifier1";
 const KILLJOY_METHOD: &str = "Notify";
 
-#[derive(Debug, StructOpt)]
-#[structopt(
+#[derive(Debug, Parser)]
+#[command(
     name = "killjoy-notifier-slack",
     about = "Send Killjoy notifications to Slack"
 )]
 struct Cli {
-    #[structopt(long)]
+    #[arg(long)]
     system: bool,
-    #[structopt(long)]
+    #[arg(long)]
     user: bool,
 }
 
@@ -60,7 +60,7 @@ struct SlackPayload {
 const DEFAULT_EMOJI: &str = ":robot_face:";
 
 fn main() -> Result<()> {
-    let args = Cli::from_args();
+    let args = Cli::parse();
 
     env_logger::Builder::from_env(
         Env::default()
