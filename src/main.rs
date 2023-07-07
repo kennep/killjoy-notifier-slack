@@ -145,7 +145,7 @@ fn post_slack_webhook(
     unit_name: &str,
     active_states: &[String],
 ) -> Result<()> {
-    let client = reqwest::Client::new();
+    let client = reqwest::blocking::Client::new();
 
     let active_states_string = format_active_states(active_states)?;
     let payload = SlackPayload {

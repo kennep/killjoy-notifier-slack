@@ -32,8 +32,8 @@ jobs:
       strategy:
         matrix:
           image:
-            - 'debian:buster'   # debian/10
             - 'debian:bullseye' # debian/11
+            - 'debian:bookworm' # debian/10
       name: Build Debian packages
       runs-on: ubuntu-latest
       container: ${{ matrix.image }}
