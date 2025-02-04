@@ -17,7 +17,7 @@ xdg = "^2.5.2"
 clap   =  { version = "^4.3.11", features = ["derive", "cargo" ] }
 anyhow = "^1.0"
 serde = { version = "^1.0.193", features = ["derive"] }
-serde_json = "^1.0.59"
+serde_json = "^1.0.109"
 reqwest = { version = "^0.12.12", features = ["blocking", "json"] }
 log = "^0.4.14"
 env_logger = "^0.10.2"
