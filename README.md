@@ -1,3 +1,8 @@
+**This program is no longer maintained.**
+
+As Killjoy is no longer maintained, this killjoy notifier will also not be updated anymore,
+not even to fix security vulnerabilities.
+
 killjoy Notifier: Slack
 ==============================
 
